@@ -43,7 +43,7 @@ class DrawingUtil {
     static drawSILNode(context : CanvasRenderingContext2D, i : number, scale : number) {
         context.fillStyle = colors[i]
         context.save()
-        context.translate(0, i * (h / (2 * parts + 1)))
+        context.translate(0, (2 * i + 1) * (h / (2 * parts + 1)))
         DrawingUtil.drawSquareInLine(context, scale)
         context.restore()
     }
