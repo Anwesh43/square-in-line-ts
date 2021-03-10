@@ -25,3 +25,26 @@ class ScaleUtil {
         return Math.sin(scale * Math.PI)
     }
 }
+
+class DrawingUtil {
+
+    static drawSquareInLine(context : CanvasRenderingContext2D, scale : number) {
+        const size : number = w / (2 * parts + 1)
+        const sf : number = ScaleUtil.sinify(scale)
+        for (let j = 0; j < parts; j++) {
+            const sfj : number = ScaleUtil.divideScale(sf, j, parts)
+            context.save()
+            context.translate(size * (2 * j + 1), 0)
+            context.fillRect(-size * 0.5 * sfj, -size * 0.5 * sfj, size * sfj, size * sfj)
+            context.restore()
+        }
+    }
+
+    static drawSILNode(context : CanvasRenderingContext2D, i : number, scale : number) {
+        context.fillStyle = colors[i]
+        context.save()
+        context.translate(0, i * (h / (2 * parts + 1)))
+        DrawingUtil.drawSquareInLine(context, scale)
+        context.restore()
+    }
+}
