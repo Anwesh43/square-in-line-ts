@@ -188,3 +188,25 @@ class SquareInLine {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    sil : SquareInLine = new SquareInLine()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.sil.draw(context)
+    }
+    
+    handleTap(cb : Function) {
+        this.sil.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.sil.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
